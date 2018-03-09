@@ -239,3 +239,8 @@ img {
 #add_new_card #card_description {
     height: 70px;
 }
+
+#lists {
+    display: inline-block;
+    vertical-align: top;
+}

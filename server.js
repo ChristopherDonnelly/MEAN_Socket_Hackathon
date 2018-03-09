@@ -121,11 +121,11 @@ board1.createList("another list")
 board1.showBoard();
 // board1.deleteList(2);
 
-// board1.lists[0].createCard("Card1's Title","card1 desc")
-// board1.lists[0].createCard("Card2's Title", "card2 desc")
+board1.lists[0].createCard("Card1's Title","card1 desc")
+board1.lists[0].createCard("Card2's Title", "card2 desc")
 // board1.lists[0].moveCard(board1.lists[0].cards[0], 1)
-// console.log(board1.lists[0].cards[0])
-// board1.lists[1].addCard(board1.lists[0].cards[0])
+console.log(board1.lists[0].cards[0])
+//board1.lists[1].addCard(board1.lists[0].cards[0])
 // board1.lists[1].deleteCard(board1.lists[0].cards[0])
 
 // console.log(board1.lists);
@@ -148,7 +148,7 @@ io.sockets.on('connection', function(socket) {
     console.log("Client/socket id is: ", socket.id);
     
     socket.emit("display_board", {board: board1.lists});
-    console.log("This is the board we're sending to client " + {board: this.lists})
+    //console.log("This is the board we're sending to client " + {board: this.lists})
 
     socket.on("delete_list", function(data){
         board1.deleteList(data.list_id);

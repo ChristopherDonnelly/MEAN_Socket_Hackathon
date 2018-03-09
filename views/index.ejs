@@ -20,11 +20,41 @@
             let socket  = io.connect();
 
             makeSortable();
+            
+            socket.on('card_added', function(data){
+                // alert('card added')
+            });
 
             socket.on('display_board', function(data){
-                // Method to parse and display Board, lists and cards
                 
-                console.log(data);
+                $('#lists').empty();
+
+                let lists = data.board;
+                for(var list = 0; list<lists.length; list++){
+                    let list_item = '';
+                    // console.log(lists[list])
+                    // console.log(lists[list].id)
+                    // console.log(lists[list].list_title)
+                    list_item += `<form action="" id="${lists[list].id}" class="list" method="post"><p>${lists[list].list_title}</p><div class="cards">`;
+                    
+                    let card_item = '';
+
+                    console.log(lists[list].cards)
+
+                    for(var card=0; card<lists[list].cards.length; card++){
+                        var card_info = lists[list].cards[card];
+                        console.log(card_info)
+                        
+                        card_item += `<div id="${card_info.id}" class="card"><p>${card_info.card_title}</p><p>${card_info.card_desc}</p></div>`
+                    }
+
+                    list_item += card_item;
+                    list_item += `</div><span><input type="submit" value="Add a card..."></span></form>`;
+                    
+                    $('#lists').append(list_item);
+                }
+                
+                
 
                 // <form action="" id="list_2" class="list" method="post">
                 //     <div class="cards">
@@ -41,6 +71,7 @@
                 //         <input type="submit" value="Add a card...">
                 //     </span>
                 // </form>
+                makeSortable();
             });
 
             $("#create_list").submit(function(e){
@@ -174,18 +205,18 @@
                     </span>
                 </form> -->
 
-                <form action="" id="create_list" method="post">
-                    <div id="add_new_list" class="hidden">
-                        <input type="text" id="list_name" placeholder="Add a list...">
-                        <span>
-                            <input type="submit" value="Save">
-                        </span>
-                    </div>
-                    <span id="add_new_list_button">
-                        <input type="submit" value="Add a list...">
-                    </span>
-                </form>
             </div>
+            <form action="" id="create_list" method="post">
+                <div id="add_new_list" class="hidden">
+                    <input type="text" id="list_name" placeholder="Add a list...">
+                    <span>
+                        <input type="submit" value="Save">
+                    </span>
+                </div>
+                <span id="add_new_list_button">
+                    <input type="submit" value="Add a list...">
+                </span>
+            </form>
         </div>
     </div>
 </body>
