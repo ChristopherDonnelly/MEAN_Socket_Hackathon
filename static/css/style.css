@@ -13,11 +13,13 @@
 
 #content_layer {
     width: 850px;
+    height: 580px;
     border: 2px inset darkgray;
     margin: 25px auto;
     padding: 25px;
     box-shadow: 3px 3px 5px lightgrey;
-    text-align: center;
+    text-align: left;
+    overflow-x: auto;
 }
 
 #show_layer {
@@ -81,40 +83,6 @@ a {
     padding-top: 1px;
 }
 
-#content_layer p.error {
-    color: red;
-    font-size: 0.9em;
-    position: absolute;
-    left: -10px;
-}
-p.error::before {
-    content: '*';
-    position: absolute;
-    margin-left: -400px;
-    margin-top: -5px;
-}
-p.login_username.error:before, p.username.error:before  {
-    margin-left: -440px;
-}
-p.password.error:before, p.login_password.error:before {
-    margin-left: -435px;
-}
-p.confirm_pw.error:before {
-    margin-left: -513px;
-}
-p.name.error, p.login_username.error {
-    top: 7px;
-}
-p.username.error, p.login_password.error {
-    top: 57px;
-}
-p.password.error {
-    top: 107px;
-}
-p.confirm_pw.error {
-    top: 157px;
-}
-
 table {
     width: 100%;
 }
@@ -160,7 +128,7 @@ input[type="submit"], button {
     text-shadow: 1px 1px 2px grey;
     cursor: pointer;
     color: black;
-    margin: 25px 0px;
+    margin: 5px 0px;
 }
 
 input[type="submit"]:hover, button:hover {
@@ -169,46 +137,6 @@ input[type="submit"]:hover, button:hover {
     color: white;
     box-shadow: 3px 3px 10px lightgrey;
     text-shadow: 1px 1px 2px grey;
-}
-
-#button_game input[type="submit"] {
-    background-color: #085394;
-    color: white;
-    width: 200px;
-    height: 70px;
-    font-size: 2em;
-    border-radius: 15px;
-    border-color: black;
-    box-shadow: 3px 3px 5px lightblue;
-}
-
-#button_game input[type="submit"]:hover {
-    border: 1px solid darkgray;
-    background-color: lightskyblue;
-    color: white;
-    box-shadow: 3px 3px 10px lightgrey;
-    text-shadow: 1px 1px 2px grey;
-}
-
-#reset_game {
-    text-align: right;
-}
-#reset_game input[type="submit"] {
-    border: 1px solid black;
-    background-color: red;
-    color: white;
-    box-shadow: 3px 3px 2px black;
-    text-shadow: 1px 1px 2px grey;
-    border-radius: 0px;
-}
-
-#reset_game input[type="submit"]:hover {
-    border: 1px solid red;
-    background-color: black;
-    color: red;
-    box-shadow: 3px 3px 2px darkred;
-    text-shadow: 1px 1px 2px darkred;
-    border-radius: 0px;
 }
 
 .red {
@@ -243,4 +171,71 @@ img {
 
 .hidden {
     display: none;
+}
+
+.list, #create_list {
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 5px;
+    background-color: #e2e4e6;
+    box-shadow: 3px 3px 3px lightblue;
+    text-align: center;
+    margin: 0px 5px;
+    width: 250px;
+}
+
+.cards {
+    min-height: 40px;
+}
+
+.card {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 6px;
+    max-width: 300px;
+    min-height: 20px;
+    position: relative;
+    text-decoration: none;
+    z-index: 0;
+    margin: 10px;
+    box-shadow: 3px 3px 3px lightgrey;
+}
+
+#content_layer .card p {
+    font-size: 1em;
+    padding-bottom: 0px;
+    font-weight: bold;
+}
+
+#content_layer .card p~p {
+    padding-bottom: 10px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.highlight {
+    background-color: lightskyblue;
+    box-shadow: 3px 3px 3px lightgrey;
+    min-height: 50px;
+    border-radius: 10px;
+    margin: 10px;
+}
+.ui-sortable-helper {
+    transform: rotate(-25deg);
+}
+
+#add_new_list, #add_new_card {
+    margin: 15px auto;
+    width: 90%;
+}
+
+#add_new_list #list_name, #add_new_card #card_title, #add_new_card #card_description {
+    width: 90%;
+}
+
+#add_new_card #card_description {
+    height: 70px;
 }
