@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Great Button Game</title>
+    <link rel='stylesheet' href='/css/style.css' />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+
+         $(document). ready(function (){
+            // this triggers the connection event in our server!
+            var socket  = io.connect();
+
+            socket.on('broadcast_event', function(data){
+                $('#text').html(data.count);
+            });
+
+            $("#button_game").submit(function(e){
+                socket.emit("button_clicked");
+                e.preventDefault();
+            });
+
+            $("#reset_game").submit(function(e){
+                socket.emit("reset_clicked");
+                e.preventDefault();
+            });
+
+        })
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>The Great Button Game</h1> 
+        <div id="content_layer">
+            <h2>The button has been pushed <span id="text">0</span> time(s)</h2>
+            <p>Push the button to update the count!</p>
+            <form action="" id="button_game" method="post">
+                <span>
+                    <input type="submit" value="Submit">
+                </span>
+            </form>
+            <form action="" id="reset_game" method="post">
+                <span>
+                    <input type="submit" value="Reset">
+                </span>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
