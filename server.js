@@ -131,7 +131,6 @@ board1.showBoard();
 // console.log(board1.lists);
 
 
-
 // var list1 = new List("Super Cool List Title!", board1.lists);
 // var list2 = new List("an ok list", "this is an ok list's description");
 // list1.createCard("Card1 Title", "Card1's Cool Description!");
@@ -162,11 +161,14 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on("create_list", function(data){
+        board1.createList(data.name);
         socket.broadcast.emit("list_added", {list_id: data.list_id});
     });
 
     socket.on("create_card", function(data){
         target_list = board1.lists[data.list_id]
+        target_list.createCard(data.title, data.card_desc);
+
         card_added = {
             list_id: data.list_id,
             card: board1.target_list.cards[data.card_id]
