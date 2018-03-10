@@ -21,29 +21,17 @@
 
             makeSortable();
             
-            socket.on('card_added', function(data){
-                // alert('card added')
-            });
-
-            socket.on('display_board', function(data){
+            function addListsandCards(lists){
                 
-                $('#lists').empty();
-
-                let lists = data.board;
+                console.log(lists.length)
                 for(var list = 0; list<lists.length; list++){
                     let list_item = '';
-                    // console.log(lists[list])
-                    // console.log(lists[list].id)
-                    // console.log(lists[list].list_title)
                     list_item += `<form action="" id="${lists[list].id}" class="list" method="post"><p>${lists[list].list_title}</p><div class="cards">`;
                     
                     let card_item = '';
 
-                    console.log(lists[list].cards)
-
                     for(var card=0; card<lists[list].cards.length; card++){
                         var card_info = lists[list].cards[card];
-                        console.log(card_info)
                         
                         card_item += `<div id="${card_info.id}" class="card"><p>${card_info.card_title}</p><p>${card_info.card_desc}</p></div>`
                     }
@@ -53,24 +41,23 @@
                     
                     $('#lists').append(list_item);
                 }
-                
-                
+            }
 
-                // <form action="" id="list_2" class="list" method="post">
-                //     <div class="cards">
-                //         <div id="card_2" class="card">
-                //             <p>Title 2</p>
-                //             <p>Description 2 - Let's have a little bit of content.</p>
-                //         </div>
-                //         <div id="card_1" class="card">
-                //             <p>Title 1</p>
-                //             <p>Description 1 - Let's have a little bit of content.</p>
-                //         </div>
-                //     </div>
-                //     <span>
-                //         <input type="submit" value="Add a card...">
-                //     </span>
-                // </form>
+            socket.on('card_added', function(data){
+                // alert('card added')
+            });
+
+            socket.on('list_added', function(data){
+                console.log(data);
+                addListsandCards([data.list_id]);
+            });
+
+            socket.on('display_board', function(data){
+                
+                $('#lists').empty();
+
+                addListsandCards(data.board);
+
                 makeSortable();
             });
 
@@ -79,7 +66,7 @@
                 if(val=="Save"){
                     var title = $("#create_list #list_name").val();
                     
-                    console.log(title)
+                    //console.log(title)
                     socket.emit("create_list", {'name': title});
                     
                     $('#add_new_list').addClass('hidden');

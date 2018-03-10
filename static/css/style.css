@@ -20,6 +20,7 @@
     box-shadow: 3px 3px 5px lightgrey;
     text-align: left;
     overflow-x: auto;
+    white-space: nowrap;
 }
 
 #show_layer {
@@ -182,6 +183,7 @@ img {
     text-align: center;
     margin: 0px 5px;
     width: 250px;
+    white-space: normal;
 }
 
 .cards {

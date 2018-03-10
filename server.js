@@ -92,7 +92,7 @@ class Board {
         this.lists = [];
     }
     createList(list_title){
-        this.lists.push(new List(list_title, this.lists));
+        return this.lists.push(new List(list_title, this.lists));
     }
     deleteList(list_id){
         console.log(getId(this.lists,list_id))
@@ -161,8 +161,9 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on("create_list", function(data){
-        board1.createList(data.name);
-        socket.broadcast.emit("list_added", {list_id: data.list_id});
+        console.log(data.name)
+        var len = board1.createList(data.name);
+        io.emit("list_added", {list_id: board1.lists[len-1]});
     });
 
     socket.on("create_card", function(data){
